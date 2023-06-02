@@ -15,3 +15,5 @@ WORKDIR /artemis
 
 ## Run the application
 CMD python artemis.py
+
+
