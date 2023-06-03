@@ -42,12 +42,6 @@ jobs:
         with:
           creds: ${{ secrets.TEST_AZURE_CREDENTIALS }}
 
-      - name: Build Docker image
-        run: docker build --tag hussdemo.azurecr.io/test:${{ github.sha }} --file demo/Dockerfile demo
-
-      - name: Push Docker image to registry
-        run: docker push hussdemo.azurecr.io/test:${{ github.sha }}
-
       - name: Build and push container image to registry
         uses: azure/container-apps-deploy-action@v1
         with:
