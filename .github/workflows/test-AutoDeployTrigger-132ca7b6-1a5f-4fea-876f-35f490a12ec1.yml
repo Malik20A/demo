@@ -25,17 +25,18 @@ jobs:
 
     steps:
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
 
       - name: Clone a repo
         run: |
           git clone ${{ env.repo }}
           ls -ltr
 
-      # - name: Switch Branch
-      #   working-directory: ${{ env.app_name }}
-      #   run: |
-      #     git checkout ${{ env.app_version }}
+      - name: Switch Branch
+        working-directory: ${{ env.app_name }}
+        run: |
+          cd artemis
+          git checkout ${{ env.app_version }}
 
       # - name: Azure Login
       #   uses: azure/login@v1
