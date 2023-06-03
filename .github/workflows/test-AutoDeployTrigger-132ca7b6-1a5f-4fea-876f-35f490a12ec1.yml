@@ -42,14 +42,14 @@ jobs:
         with:
           creds: ${{ secrets.TEST_AZURE_CREDENTIALS }}
 
-      # - name: Build and push container image to registry
-      #   uses: azure/container-apps-deploy-action@v1
-      #   with:
-      #     appSourcePath: ${{ github.workspace }}
-      #     registryUrl: hussdemo.azurecr.io
-      #     registryUsername: ${{ secrets.TEST_REGISTRY_USERNAME }}
-      #     registryPassword: ${{ secrets.TEST_REGISTRY_PASSWORD }}
-      #     containerAppName: test
-      #     resourceGroup: hussdemo
-      #     imageToBuild: hussdemo.azurecr.io/test:${{ github.sha }}
-      #     dockerfilePath: Dockerfile
+      - name: Build and push container image to registry
+        uses: azure/container-apps-deploy-action@v1
+        with:
+          appSourcePath: ${{ github.workspace }}
+          registryUrl: hussdemo.azurecr.io
+          registryUsername: ${{ secrets.TEST_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.TEST_REGISTRY_PASSWORD }}
+          containerAppName: test
+          resourceGroup: hussdemo
+          imageToBuild: hussdemo.azurecr.io/test:${{ github.sha }}
+          dockerfilePath: Dockerfile
