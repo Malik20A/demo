@@ -1,6 +1,6 @@
 env:
   repo: "https://github.com/Malik20A/demo"
-  app_version: "6.0.0"
+  app_version: "10.0.0"
   app_name: "artemis"
 
 
