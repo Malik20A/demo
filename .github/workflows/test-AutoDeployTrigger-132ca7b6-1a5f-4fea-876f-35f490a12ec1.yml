@@ -34,7 +34,7 @@ jobs:
 
       - name: Switch Branch
         run: |
-          cd demo/artemis
+          cd demo
           git checkout ${{ env.app_version }}
 
       # - name: Azure Login
