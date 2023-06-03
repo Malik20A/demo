@@ -1,3 +1,9 @@
+env:
+  repo: "https://github.com/malik/demo"
+  app_version: "5.0.0"
+  app_name: "artemis"
+
+
 name: Trigger auto deployment for test
 
 # When this action will be executed
@@ -18,8 +24,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout to the branch
-        uses: actions/checkout@v3
+
+      - uses: actions/checkout@v3
+
+      - name: Clone a repo
+        run: |
+          git clone ${{ env.repo }}
+          
+      - name: Switch Branch
+        working-directory: ${{ env.app_name }}
+        run: |
+          git checkout ${{ env.app_version }}
 
       - name: Azure Login
         uses: azure/login@v1
