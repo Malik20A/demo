@@ -33,9 +33,8 @@ jobs:
           ls -ltr
 
       - name: Switch Branch
-        working-directory: ${{ env.app_name }}
         run: |
-          cd artemis
+          cd demo/artemis
           git checkout ${{ env.app_version }}
 
       # - name: Azure Login
