@@ -1,42 +1,49 @@
-name: Trigger auto deployment for example-container-app
+env:
+  repo: "https://github.com/Malik20A/demo"
+  app_version: "5.0.0"
+  app_name: "artemis"
 
-# When this action will be executed
+name: Trigger auto deployment for test
+
 on:
-  # Automatically trigger it when detected changes in repo
   push:
-    branches: 
-      [ main ]
+    branches:
+      - main
     paths:
-    - '**'
-    - '.github/workflows/example-container-app-AutoDeployTrigger-fdbdf4ce-d193-4210-83c2-d5e60e176bfe.yml'
-
-  # Allow mannually trigger 
+      - '**'
+      - '.github/workflows/example-container-app-AutoDeployTrigger-fdbdf4ce-d193-4210-83c2-d5e60e176bfe.yml'
   workflow_dispatch:
-      
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout to the branch
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+
+      - name: Clone a repo
+        run: |
+          git clone ${{ env.repo }}
+          ls -ltr
+
+      - name: Switch Branch
+        run: |
+          cd demo
+          git checkout ${{ env.app_version }}
 
       - name: Azure Login
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.EXAMPLECONTAINERAPP_AZURE_CREDENTIALS }}
+          creds: ${{ secrets.TEST_AZURE_CREDENTIALS }}
 
       - name: Build and push container image to registry
         uses: azure/container-apps-deploy-action@v1
         with:
-          appSourcePath: ${{ github.workspace }} 
-          registryUrl: xhussreg.azurecr.io
-          registryUsername: ${{ secrets.EXAMPLECONTAINERAPP_REGISTRY_USERNAME }}
-          registryPassword: ${{ secrets.EXAMPLECONTAINERAPP_REGISTRY_PASSWORD }}
-          containerAppName: example-container-app
-          resourceGroup: example-resource-group
-          imageToBuild: xhussreg.azurecr.io/example-container-app:${{ github.sha }}
-          
-
-     
-
+          appSourcePath: ${{ github.workspace }}/demo
+          registryUrl: hussdemo.azurecr.io
+          registryUsername: ${{ secrets.TEST_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.TEST_REGISTRY_PASSWORD }}
+          containerAppName: test
+          resourceGroup: hussdemo
+          imageToBuild: hussdemo.azurecr.io/test:${{ github.sha }}
+          dockerfilePath: Dockerfile

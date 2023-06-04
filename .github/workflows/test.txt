@@ -1,0 +1,100 @@
+# env:
+#   repo: "https://github.com/Malik20A/demo"
+#   app_version: "5.0.0"
+#   app_name: "artemis"
+
+# name: Trigger auto deployment for test
+
+# on:
+#   push:
+#     branches:
+#       - main
+#     paths:
+#       - '**'
+#       - '.github/workflows/test-AutoDeployTrigger-2e910b61-e7ae-4f68-a36c-6a6981defc4c.yml'
+#   workflow_dispatch:
+
+# jobs:
+#   build-and-deploy:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - uses: actions/checkout@v2
+
+#       - name: Clone a repo
+#         run: |
+#           git clone ${{ env.repo }}
+#           ls -ltr
+
+#       - name: Switch Branch
+#         run: |
+#           cd demo
+#           git checkout ${{ env.app_version }}
+
+#       - name: Azure Login
+#         uses: azure/login@v1
+#         with:
+#           creds: ${{ secrets.TEST_AZURE_CREDENTIALS }}
+
+#       - name: Build and push container image to registry
+#         uses: azure/container-apps-deploy-action@v1
+#         with:
+#           appSourcePath: ${{ github.workspace }}/demo
+#           registryUrl: hussdemo.azurecr.io
+#           registryUsername: ${{ secrets.TEST_REGISTRY_USERNAME }}
+#           registryPassword: ${{ secrets.TEST_REGISTRY_PASSWORD }}
+#           containerAppName: test
+#           resourceGroup: hussdemo
+#           imageToBuild: hussdemo.azurecr.io/test:${{ github.sha }}
+#           dockerfilePath: Dockerfile
+
+
+# env:
+#   repo: "https://github.com/Malik20A/demo"  # Repository URL
+#   app_version: "5.0.0"  # Version of the application
+#   app_name: "artemis"  # Name of the application
+
+# name: Trigger auto deployment for test
+
+# on:
+#   push:
+#     branches:
+#       - main
+#     paths:
+#       - '**'
+#       - '.github/workflows/test-AutoDeployTrigger-2e910b61-e7ae-4f68-a36c-6a6981defc4c.yml'
+#   workflow_dispatch:
+
+# jobs:
+#   build-and-deploy:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - uses: actions/checkout@v2  # Check out the repository
+
+#       - name: Clone a repo  # Clone the repository
+#         run: |
+#           git clone ${{ env.repo }}  # Clone the repository using the URL
+#           ls -ltr  # List the cloned files and directories
+
+#       - name: Switch Branch  # Switch to a specific branch
+#         run: |
+#           cd demo  # Navigate to the cloned repository directory
+#           git checkout ${{ env.app_version }}  # Switch to the specified branch
+
+#       - name: Azure Login  # Log in to Azure
+#         uses: azure/login@v1
+#         with:
+#           creds: ${{ secrets.TEST_AZURE_CREDENTIALS }}  # Use the Azure credentials stored as a secret
+
+#       - name: Build and push container image to registry  # Build and push the Docker image to Azure Container Registry
+#         uses: azure/container-apps-deploy-action@v1
+#         with:
+#           appSourcePath: ${{ github.workspace }}/demo  # Specify the path to the application source code
+#           registryUrl: hussdemo.azurecr.io  # URL of the Azure Container Registry
+#           registryUsername: ${{ secrets.TEST_REGISTRY_USERNAME }}  # Azure Container Registry username
+#           registryPassword: ${{ secrets.TEST_REGISTRY_PASSWORD }}  # Azure Container Registry password
+#           containerAppName: test  # Name of the container application
+#           resourceGroup: hussdemo  # Resource group name in Azure
+#           imageToBuild: hussdemo.azurecr.io/test:${{ github.sha }}  # Tag the Docker image with the GitHub commit SHA
+#           dockerfilePath: Dockerfile  # Path to the Dockerfile within the application source code directory
