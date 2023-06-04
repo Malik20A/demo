@@ -44,6 +44,6 @@ jobs:
           registryUsername: ${{ secrets.EXAMPLECONTAINERAPP_REGISTRY_USERNAME }}
           registryPassword: ${{ secrets.EXAMPLECONTAINERAPP_REGISTRY_PASSWORD }}
           containerAppName: test
-          resourceGroup: hussdemo
+          resourceGroup: example-resource-group
           imageToBuild: xhussreg.azurecr.io/test:${{ github.sha }}
           dockerfilePath: Dockerfile
