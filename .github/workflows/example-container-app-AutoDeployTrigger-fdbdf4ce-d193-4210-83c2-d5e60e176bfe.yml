@@ -34,16 +34,16 @@ jobs:
       - name: Azure Login
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.TEST_AZURE_CREDENTIALS }}
+          creds: ${{ secrets.EXAMPLECONTAINERAPP_AZURE_CREDENTIALS }}
 
       - name: Build and push container image to registry
         uses: azure/container-apps-deploy-action@v1
         with:
           appSourcePath: ${{ github.workspace }}/demo
           registryUrl: hussdemo.azurecr.io
-          registryUsername: ${{ secrets.TEST_REGISTRY_USERNAME }}
-          registryPassword: ${{ secrets.TEST_REGISTRY_PASSWORD }}
+          registryUsername: ${{ secrets.EXAMPLECONTAINERAPP_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.EXAMPLECONTAINERAPP_REGISTRY_PASSWORD }}
           containerAppName: test
           resourceGroup: hussdemo
-          imageToBuild: hussdemo.azurecr.io/test:${{ github.sha }}
+          imageToBuild: hussdemo.azurecr.io/EXAMPLECONTAINERAPP:${{ github.sha }}
           dockerfilePath: Dockerfile
