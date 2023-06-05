@@ -11,10 +11,6 @@ on:
   push:
     branches:
       [ main ]
-    paths:
-    - '**'
-    - '.github/workflows/testapp-AutoDeployTrigger-56a1408b-d6d6-4548-9f97-d60b902a00c8.yml'
-
   # Allow mannually trigger
   workflow_dispatch:
 
